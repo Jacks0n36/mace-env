@@ -1,0 +1,27 @@
+name: mace
+channels:
+  - default
+  - conda-forge
+  - pytorch
+dependencies:
+  - python>=3.7
+  - pytorch::pytorch>=1.12
+  - e3nn==0.4.4
+  - numpy
+  - opt_einsum
+  - ase
+  - torch-ema
+  - prettytable
+  - matscipy
+  - h5py
+  - torchmetrics
+  - python-hostlist
+  - configargparse
+  - GitPython
+  - pyYAML
+  - tqdm
+  - python-lmdb
+  - orjson
+  - matplotlib
+  - pandas
+
