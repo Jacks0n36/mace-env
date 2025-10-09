@@ -5,16 +5,17 @@ RUN apt-get update && \
     apt-get -y install git gcc g++ && \
     rm -rf /var/lib/apt/lists/*
 
-COPY mace_dependencies.yml .
+COPY environment.yml .
 
-RUN conda env create -f mace_dependencies.yml && \
+RUN conda env create -f environment.yml && \
     conda clean --all -afy
 
-# Install pip manually in case it is missing in the environment
-RUN conda run -n mace python -m ensurepip --upgrade
-RUN conda run -n mace python -m pip install --upgrade pip setuptools wheel
+ARG CACHEBUST
+RUN cd /home && \ 
+    git clone https://github.com/Jacks0n36/mlipenv
 
 ENV PATH=/opt/conda/bin:$PATH
+ENV MLIP_SOCKET_PORT=27182
+ENV CALCULATOR=mace
 
-# Set the default shell to use bash and activate the conda environment
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "mace"]
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "mace", "python", "/home/mlipenv/mlip_server.py"]
