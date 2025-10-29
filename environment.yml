@@ -1,4 +1,6 @@
 name: mace
+channels:
+  - defaults
 dependencies:
   - python
   - pip
